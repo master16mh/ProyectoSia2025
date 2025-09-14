@@ -1,0 +1,20 @@
+﻿body {
+}
+
+.enterprise-table {
+    -moz-animation: inherit;
+    -o-animation: inherit;
+    -webkit-animation: inherit;
+    animation: inherit;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    border-spacing: 15px 15px;
+    border-collapse: separate;
+}
+
+.btn-tercary{
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

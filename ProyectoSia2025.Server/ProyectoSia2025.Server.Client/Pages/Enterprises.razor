@@ -1,0 +1,39 @@
+﻿@page "/enterprises"
+
+<PageTitle>Enterprises</PageTitle>
+
+<h1>Administrar Empresas</h1>
+
+  <table class="enterprise-table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha de Creación</th>
+        <th>Fecha de Actualización</th>
+      </tr>
+    </thead>
+  </table>
+
+<button class="btn btn-primary" @onclick="CreateEnterprise">Añadir Empresa</button>
+<button class="btn btn-secondary" @onclick="EditEnterprise">Editar</button>
+<button class="btn btn-tercary" @onclick="ViewDetails">Ver detalles</button>
+
+
+@code {
+    private void CreateEnterprise(MouseEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void EditEnterprise(MouseEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ViewDetails(MouseEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+}

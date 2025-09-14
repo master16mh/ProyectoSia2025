@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoSia2025.BD;
 
@@ -10,9 +11,11 @@ using ProyectoSia2025.BD;
 namespace ProyectoSia2025.BD.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250813044549_EBaseEnumEstadoRegistro")]
+    partial class EBaseEnumEstadoRegistro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,10 +40,6 @@ namespace ProyectoSia2025.BD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DNI")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -48,14 +47,7 @@ namespace ProyectoSia2025.BD.Migrations
                     b.Property<int>("EmpresaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observacion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -66,9 +58,6 @@ namespace ProyectoSia2025.BD.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmpresaId");
-
-                    b.HasIndex(new[] { "DNI" }, "Contacto_DNI")
-                        .IsUnique();
 
                     b.ToTable("ContactoEmpresas");
                 });
@@ -83,7 +72,7 @@ namespace ProyectoSia2025.BD.Migrations
 
                     b.Property<string>("CUIT")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -106,26 +95,18 @@ namespace ProyectoSia2025.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "CUIT" }, "Empresa_CUIT")
-                        .IsUnique();
-
                     b.ToTable("Empresas");
                 });
 
             modelBuilder.Entity("ProyectoSia2025.BD.Data.Entities.ContactoEmpresas", b =>
                 {
                     b.HasOne("ProyectoSia2025.BD.Data.Entities.Empresas", "Empresa")
-                        .WithMany("Contactos")
+                        .WithMany()
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("ProyectoSia2025.BD.Data.Entities.Empresas", b =>
-                {
-                    b.Navigation("Contactos");
                 });
 #pragma warning restore 612, 618
         }

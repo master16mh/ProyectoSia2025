@@ -1,29 +1,43 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoSia2025.BD;
+using ProyectoSia2025.BD.Data.Entities;
+using ProyectoSia2025.Repository.Repositorios;
 using ProyectoSia2025.Server.Client.Pages;
 using ProyectoSia2025.Server.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+#region Configurar constructor de la aplicación y sus servicios
+
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("ConnSqlServer")
     ?? throw new InvalidOperationException("El string de conexión no existe.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+                      options.UseSqlServer(connectionString));
 
 
+//builder.Services.AddScoped<IRepositorio<Empresas>, Repositorio<Empresas>>(); (desactivado para inyección genérica)
+
+builder.Services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
+builder.Services.AddScoped<IRepositorioEmpresa, RepositorioEmpresa>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+#endregion
 
 var app = builder.Build();
+#region Construccion la aplicacion y área de middlewares
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {
@@ -42,5 +56,8 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(ProyectoSia2025.Server.Client._Imports).Assembly);
+
+app.MapControllers();   
+#endregion
 
 app.Run();

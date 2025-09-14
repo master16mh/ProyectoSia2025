@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoSia2025.BD;
 
@@ -10,9 +11,11 @@ using ProyectoSia2025.BD;
 namespace ProyectoSia2025.BD.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250906085150_ContactosDtoCorregido")]
+    partial class ContactosDtoCorregido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +48,7 @@ namespace ProyectoSia2025.BD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmpresaId")
+                    b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Estado")
@@ -115,17 +118,10 @@ namespace ProyectoSia2025.BD.Migrations
             modelBuilder.Entity("ProyectoSia2025.BD.Data.Entities.ContactoEmpresas", b =>
                 {
                     b.HasOne("ProyectoSia2025.BD.Data.Entities.Empresas", "Empresa")
-                        .WithMany("Contactos")
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("EmpresaId");
 
                     b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("ProyectoSia2025.BD.Data.Entities.Empresas", b =>
-                {
-                    b.Navigation("Contactos");
                 });
 #pragma warning restore 612, 618
         }

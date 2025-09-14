@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProyectoSia2025.BD.Data.Entities
 {
-    public class CheckListItem
+    public enum EnumEstadoRegistro
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string? Descripcion { get; set; }
+       Inactivo = 0,
+       Activo = 1,
+       Borrado = 2,
+       EnGrabacion = 3,  
     }
 }
