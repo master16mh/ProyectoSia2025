@@ -48,7 +48,7 @@ namespace ProyectoSia2025.Server.Controllers
             return Ok(empresa);
         }
 
-        [HttpGet("{cuit}")]
+        [HttpGet("by-cuit/{cuit}")]
         public async Task<ActionResult<Empresas>> GetByCUIT(string cuit)
         {
             var empresa = await context.Empresas.FirstOrDefaultAsync(x => x.CUIT == cuit);
