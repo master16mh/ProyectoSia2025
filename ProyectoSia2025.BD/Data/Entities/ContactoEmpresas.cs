@@ -31,5 +31,6 @@ namespace ProyectoSia2025.BD.Data.Entities
 
         [Required(ErrorMessage = "El Cargo de contacto es obligatorio.")]
         public string Cargo { get; set; } = string.Empty;
+        
     }
 }

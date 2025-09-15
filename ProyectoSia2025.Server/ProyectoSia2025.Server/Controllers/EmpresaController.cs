@@ -4,6 +4,7 @@ using ProyectoSia2025.BD;
 using ProyectoSia2025.BD.Data.Entities;
 using ProyectoSia2025.Repository.Repositorios;
 using ProyectoSia2025.Shared;
+using ProyectoSia2025.Shared.DTOS;
 
 namespace ProyectoSia2025.Server.Controllers
 {
@@ -59,17 +60,27 @@ namespace ProyectoSia2025.Server.Controllers
             return Ok(empresa);
         }
         [HttpPost] // Crea una nueva empresa
-        public async Task<ActionResult<int>> Post(Empresas empresa)
+        public async Task<ActionResult<int>> Post([FromBody] EmpresasCrearDTO dto)
         {
             try
             {
+                var empresa = new Empresas
+                {
+                    Nombre = dto.Nombre,
+                    RazonSocial = dto.RazonSocial,
+                    CUIT = dto.CUIT,
+                    Direccion = dto.Direccion
+                    // NO incluimos Contactos
+                };
+
                 await context.Empresas.AddAsync(empresa);
                 await context.SaveChangesAsync();
+
                 return Ok(empresa.Id);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error al crear la empresa: {ex.InnerException.Message}");
+                return BadRequest($"Error al crear la empresa: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
     }
