@@ -43,35 +43,13 @@ namespace ProyectoSia2025.Server.Controllers
                 Email = c.Email,
                 Telefono = c.Telefono,
                 Cargo = c.Cargo,
-                EmpresaNombre = context.Empresas?                     
-                                        .FirstOrDefault(e => e.Id == c.EmpresaId)?.Nombre 
-                                        ?? string.Empty
+              
             }).ToList();
 
             return Ok(contactosDTO);
         }
 
-        [HttpGet("{id:int}")] // Obtiene un contacto por su ID
-        public async Task<ActionResult<ContactoEmpresas>> GetById(int id)
-        {
-            var contacto = await context.ContactoEmpresas.FirstOrDefaultAsync(x=> x.Id == id);
-            if (contacto == null)
-            {
-                return NotFound($"No se encontró el contacto con el id {id}.");
-            }
-            return Ok(contacto);
-        }
-
-        [HttpGet("dni/{dni}")]
-        public async Task<ActionResult<ContactoEmpresas>> GetByDNI(string dni)
-        {
-            var contacto = await context.ContactoEmpresas.FirstOrDefaultAsync(x => x.DNI == dni);
-            if (contacto == null)
-            {
-                return NotFound($"No se encontró el contacto con el DNI {dni}.");
-            }
-            return Ok(contacto);
-        }
+        
         [HttpPost] // Crea un nuevo contacto de empresa
         public async Task<ActionResult<int>> Post([FromBody]ContactoEmpresasDto dto)
         {

@@ -29,6 +29,7 @@ namespace ProyectoSia2025.Repository.Repositorios
                                      Direccion = e.Direccion,
                                      Contactos = e.Contactos.Select(c => new ContactoDTO
                                      {
+                                         EmpresaId = c.EmpresaId,
                                          Nombre = c.Nombre,
                                          Apellido = c.Apellido,
                                          DNI = c.DNI,

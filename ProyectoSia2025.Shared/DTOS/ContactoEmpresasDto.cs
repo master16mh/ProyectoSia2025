@@ -15,6 +15,5 @@ namespace ProyectoSia2025.Shared.DTOS
         public string Telefono { get; set; } 
         public string Cargo { get; set; }  
         public int EmpresaId { get; set; }
-        public string EmpresaNombre { get; set; }
     }
 }

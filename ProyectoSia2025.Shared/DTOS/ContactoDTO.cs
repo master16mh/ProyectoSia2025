@@ -8,6 +8,7 @@ namespace ProyectoSia2025.Shared.DTOS
 {
     public class ContactoDTO
     {
+        public int EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string DNI { get; set; }
