@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ProyectoSia2025.BD.Data.Entities;
+using ProyectoSia2025.Repository.Repositorios;
+using ProyectoSia2025.Shared.DTOS;
+
+namespace ProyectoSia2025.Repository.Repositorios
+{
+    public interface IContactoEmpresasRepositorio
+    {
+        Task<IEnumerable<ContactoEmpresasDto>> GetContactosConEmpresaAsync();
+    }
+}
