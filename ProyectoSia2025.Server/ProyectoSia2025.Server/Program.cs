@@ -24,11 +24,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
 builder.Services.AddScoped<IRepositorioEmpresa, RepositorioEmpresa>();
 
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor()
             .AddCircuitOptions(options => { options.DetailedErrors = true; });
 
